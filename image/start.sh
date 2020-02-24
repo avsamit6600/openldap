@@ -67,7 +67,7 @@ TLSCACertificateFile /ssl/live/${DOMAIN}/chain.pem
 # apk add ca-certificates +:
 #TLSCACertificatePath /usr/share/ca-certificates/mozilla
 EOF
-    SSL_HOSTS=" ldaps:/// ldapi:///"
+    SSL_HOSTS=" ldaps://0.0.0.0:6360/ ldapi:///"
 elif test -e /ssl/${DOMAIN}-ca.crt \
         -a -e /ssl/${DOMAIN}.key \
         -a -e /ssl/${DOMAIN}.pem; then
@@ -79,7 +79,7 @@ TLSCACertificateFile /ssl/${DOMAIN}-ca.crt
 # apk add ca-certificates +:
 #TLSCACertificatePath /usr/share/ca-certificates/mozilla
 EOF
-    SSL_HOSTS=" ldaps:/// ldapi:///"
+    SSL_HOSTS=" ldaps://0.0.0.0:6360/ ldapi:///"
     SSL_HOSTS=""
 fi
 
@@ -119,9 +119,9 @@ fi
 
 # run
 mkdir -p /var/lib/openldap/run
-chown -R ${USER}.${GROUP} /var/lib/ldap /etc/ldap /var/lib/openldap
+sudo chown -R ${USER}.${GROUP} /var/lib/ldap /etc/ldap /var/lib/openldap
 chmod 700 /var/lib/ldap
-/usr/sbin/slapd -u $USER -g $GROUP -d ${DEBUG} -h "ldap:///${SSL_HOSTS}" -f /etc/ldap/slapd.conf
+/usr/sbin/slapd -u $USER -g $GROUP -d ${DEBUG} -h "ldap://0.0.0.0:3890/${SSL_HOSTS}" -f /etc/ldap/slapd.conf
 
 function multimaster() {
     if test -z "$MULTI_MASTER_REPLICATION"; then
