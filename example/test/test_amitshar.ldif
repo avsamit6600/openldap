@@ -1,0 +1,16 @@
+dn: uid=amitshar,ou=users,dc=my-company,dc=com
+uid: amitshar
+cn: amitshar
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+objectClass: shadowAccount
+userPassword: abcd
+shadowLastChange: 15969
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 7
+loginShell: /bin/bash
+uidNumber: 1400
+gidNumber: 1400
+homeDirectory: /exports/amitshar

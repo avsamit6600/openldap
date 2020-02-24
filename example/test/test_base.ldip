@@ -1,0 +1,6 @@
+dn: dc=my-company,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+dc: my-company
+o: My\Company
