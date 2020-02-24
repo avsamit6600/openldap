@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap
+  labels:
+    app: ldap
+spec:
+  selector:
+    matchLabels:
+      app: ldap  
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ldap
+    spec:
+      containers:
+        - name: ldap
+          image: avsamit6600/openldap:latest
+          ports:
+            - containerPort: 3890
+              name: ldap
+          env:
+            - name: DEBUG_LEVEL
+              value: "1"
+            - name: ORGANISATION
+              value: "My Company"
+            - name: DOMAIN
+              value: "my-company.com"
+            - name: PASSWORD
+              value: "1234567890"
