@@ -14,6 +14,8 @@ spec:
       labels:
         app: ldap
     spec:
+      securityContext: 
+        runAsUser: 101  
       containers:
         - name: ldap
           image: avsamit6600/openldap:latest
