@@ -119,7 +119,7 @@ fi
 
 # run
 mkdir -p /var/lib/openldap/run
-sudo chown -R ${USER}.${GROUP} /var/lib/ldap /etc/ldap /var/lib/openldap
+chown -R ${USER}.${GROUP} /var/lib/ldap /etc/ldap /var/lib/openldap
 chmod 700 /var/lib/ldap
 /usr/sbin/slapd -u $USER -g $GROUP -d ${DEBUG} -h "ldap://0.0.0.0:3890/${SSL_HOSTS}" -f /etc/ldap/slapd.conf
 

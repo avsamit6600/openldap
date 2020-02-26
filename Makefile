@@ -1,5 +1,5 @@
 NAME = avsamit6600/openldap
-VERSION = 1.3.2
+VERSION = 1.3.4
 
 .PHONY: build build-nocache test tag-latest push push-latest release git-tag-version
 

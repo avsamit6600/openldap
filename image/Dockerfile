@@ -40,12 +40,9 @@ ADD openssh-lpk.schema /etc/openldap/schema/openssh-lpk.schema
 ADD ldapns.schema /etc/openldap/schema/ldapns.schema
 RUN apk add --no-cache --purge --clean-protected shadow sudo -u openldap openldap-clients openldap-back-$backend ${overlays} pwgen \
  && addgroup -S $USER $SHARED_GROUP_NAME \
- && mkdir /run/openldap \
- && chown $USER.$GROUP /run/openldap \
+ && mkdir -p /run/openldap /var/lib/openldap/run /etc/ldap /var/lib/ldap \
+ && chown -R $USER.$GROUP /run/openldap /var/lib/openldap /etc/ldap /var/lib/ldap \
  && echo "$USER ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/$USER 
-
-RUN mkdir /etc/ldap \
-    && chown $USER.$GROUP /etc/ldap
 
 USER $USER 
 EXPOSE 3890
