@@ -30,14 +30,18 @@ ENV ACCESS RULES              "access to * by self write by users read by anonym
 # (1) allways added
 # (2) required by inetorgperson
 # (3) required by default lam configuration
-ENV SCHEMAS "cosine inetorgperson nis samba"
+ENV SCHEMAS "cosine inetorgperson nis samba ldapns openssh-lpk custom-ms"
 
 ENV CONTAINERNAME            "openldap"
 ENV USER                     "ldap"
 ENV GROUP                    "$USER"
+RUN rm -f /etc/openldap/schema/core.schema /etc/openldap/schema/core.ldif
+ADD core.schema /etc/openldap/schema/core.schema
+ADD core.ldif /etc/openldap/schema/core.ldif
 ADD samba.schema /etc/openldap/schema/samba.schema
 ADD openssh-lpk.schema /etc/openldap/schema/openssh-lpk.schema
 ADD ldapns.schema /etc/openldap/schema/ldapns.schema
+ADD custom-ms.schema /etc/openldap/schema/custom-ms.schema
 RUN apk add --no-cache --purge --clean-protected shadow sudo -u openldap openldap-clients openldap-back-$backend ${overlays} pwgen \
  && addgroup -S $USER $SHARED_GROUP_NAME \
  && mkdir -p /run/openldap /var/lib/openldap/run /etc/ldap /var/lib/ldap \
